@@ -1,20 +1,12 @@
 # libraries
-
-import pandas as pd
-import re
-import numpy as nps
-import math
-import os
-import time
-from pandas.core.common import flatten
-import random
 import itertools
-from collections import Counter
-import pickle
 import multiprocessing
-from pandas import DataFrame
-import time
-import itertools
+import os
+import pickle
+from collections import Counter
+
+import numpy as np
+import pandas as pd
 import scipy as sp
 
 pd.options.mode.chained_assignment = None  # default='warn'

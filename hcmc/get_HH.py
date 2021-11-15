@@ -1,23 +1,13 @@
-import pandas as pd
 import multiprocessing
-import re
-import math
 import os
-import time
 
-import random
-import itertools
+import pandas as pd
 
-pd.options.mode.chained_assignment = None  # default='warn'
-
-from collections import Counter
 import pickle
 
-
-from os import listdir
-from os.path import isfile, join
 from collections import Counter
 
+pd.options.mode.chained_assignment = None  # default='warn'
 
 def get_HH(district):
     # Load census
