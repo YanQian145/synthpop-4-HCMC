@@ -12,14 +12,17 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 def get_HH(district):
     # Load census
-    with open("data/dict_census.pickle", "rb") as handle:
+    pkl_file = os.path.join(
+        os.path.dirname(__file__), "data", "dict_census.pickle"
+    )  # Load pickle file. __file__ is the path of this file.
+    with open(pkl_file, "rb") as handle:
         dict_df_census = pickle.load(handle)
 
     district = district
     simu = 13
 
-    HH_head_path = (
-        "output/HH_head/sim" + str(simu) + "/synthHH_dis" + district + ".pickle"
+    HH_head_path = os.path.join(
+        "output", "HH_head", f"sim{simu}", f"synthHH_dis{district}.pkl"
     )
 
     start_time = pd.to_datetime("today")
@@ -28,7 +31,6 @@ def get_HH(district):
         synth_pop_list = pickle.load(handle)
 
     d_fin = {}
-    k = 0
 
     for wards in synth_pop_list[district].keys():
         print(district, wards)
@@ -47,32 +49,25 @@ def get_HH(district):
                         j = j + 1
         d_fin[wards] = d
 
-    folder_path = "output/HH/sim" + str(simu) + "/"
+    folder_path = os.path.join("output", "HH", f"sim{simu}")
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
 
-    with open(folder_path + "HH_" + str(district) + ".pickle", "wb") as handle:
+    pkl_file = os.path.join(folder_path, f"HH_dis{district}.pkl")
+    with open(pkl_file, "wb") as handle:
         pickle.dump(d_fin, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     end_time = pd.to_datetime("today")
     diff = end_time - start_time
-    text = (
-        "generated HH for "
-        + str(district)
-        + " from "
-        + str(start_time)
-        + " to "
-        + str(end_time)
-        + " - total duration: "
-        + str(diff)
-    )
+
+    text = f"generated HH for {district} from {start_time} to {end_time} - total duration: {diff}"
     print(text)
 
 
 if __name__ == "__main__":
     nb_cpu = multiprocessing.cpu_count()
     print("nb cpu ", nb_cpu)
-    p = multiprocessing.Pool(30)
+    p = multiprocessing.Pool(nb_cpu)
     district_list = [
         "760",
         "761",
