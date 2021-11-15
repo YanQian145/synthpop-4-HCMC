@@ -19,7 +19,7 @@ def get_HH(district):
     simu = 13
 
     HH_head_path = (
-            "output/HH_head/sim" + str(simu) + "/synthHH_dis" + district + ".pickle"
+        "output/HH_head/sim" + str(simu) + "/synthHH_dis" + district + ".pickle"
     )
 
     start_time = pd.to_datetime("today")
@@ -57,14 +57,14 @@ def get_HH(district):
     end_time = pd.to_datetime("today")
     diff = end_time - start_time
     text = (
-            "generated HH for "
-            + str(district)
-            + " from "
-            + str(start_time)
-            + " to "
-            + str(end_time)
-            + " - total duration: "
-            + str(diff)
+        "generated HH for "
+        + str(district)
+        + " from "
+        + str(start_time)
+        + " to "
+        + str(end_time)
+        + " - total duration: "
+        + str(diff)
     )
     print(text)
 
