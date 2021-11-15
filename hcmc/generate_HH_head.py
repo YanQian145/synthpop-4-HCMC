@@ -366,8 +366,7 @@ def generate_HH_head(simulation, district):
         print(text)
 
     # Store data, for each simulation create a folder with all the synth pop
-    out_folder = "output/HH_head/sim" + str(simulation)
-
+    out_folder = os.path.join("output", "HH_head", f"sim{simulation}")
     if not os.path.exists(out_folder):
         os.makedirs(out_folder)
     # synth pop
@@ -379,7 +378,7 @@ def generate_HH_head(simulation, district):
 if __name__ == "__main__":
     nb_cpu = multiprocessing.cpu_count()
     print("nb cpu ", nb_cpu)
-    p = multiprocessing.Pool(30)
+    p = multiprocessing.Pool(nb_cpu)
 
     simulation = list(range(0, 30))
     district = [
